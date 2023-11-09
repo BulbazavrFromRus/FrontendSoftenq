@@ -9,7 +9,6 @@ function Login() {
 
     });
     const navigate = useNavigate();
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -17,6 +16,7 @@ function Login() {
             [name]: value
         });
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +31,9 @@ function Login() {
             localStorage.setItem("token", token);
             Axios.defaults.headers.common['Authorization'] = 'Bearer ${token}';
             // После успешного входа, перенаправить
-            navigate('/user', { state: { token }, replace: true });
+            //navigate('/user', { state: { token }, replace: true });
+            navigate('/user', { state: { token, username: formData.name }, replace: true });
+
         } catch (error) {
             console.error('Ошибка при отправке данных:', error);
         }
@@ -47,6 +49,7 @@ function Login() {
                         type="text"
                         name="name"
                         value={formData.name}
+
                         onChange={handleInputChange}
                     />
                 </div>
