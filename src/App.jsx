@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Axios from "axios";
 import Reg from './registrationFile.jsx';
 import "./App.css";
+
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
   useEffect(()=>{
     getData()
   },[]);
+
   
 
   return (
