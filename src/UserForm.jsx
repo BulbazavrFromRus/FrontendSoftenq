@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import io from 'socket.io-client'
 //import {useEffect} from 'react'
 
-const socket =io.connect("http://localhost:8001")
+const socket =io.connect("http://localhost:8002")
 
 
 function UserForm() {
@@ -41,10 +41,11 @@ function UserForm() {
     };
 
     useEffect(() => {
-      socket.on("receive_message", (data) => {
-          setMessageReceived(data.message)
-      })
+        socket.on("receive_message", (data) => {
+            setMessageReceived(data.message);
+        });
     }, [socket]);
+
 
 
     return (
