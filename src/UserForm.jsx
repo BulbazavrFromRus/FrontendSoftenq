@@ -1,7 +1,11 @@
 import React, {useEffect,useRef, useState} from 'react';
 import Axios from 'axios';
 import {useLocation, useNavigate} from 'react-router-dom';
-//import WebSocket from "ws";
+import io from 'socket.io-client'
+//import {useEffect} from 'react'
+
+const socket =io.connect("http://localhost:8001")
+
 
 function UserForm() {
     const navigate = useNavigate();
@@ -9,9 +13,12 @@ function UserForm() {
 
     const token = localStorage.getItem('token');
 
-    const {token1, username} = location.state;
+    const[message, setMessage] = useState("")
+    const[messageReceived, setMessageReceived] = useState("")
 
-
+    //we find 'username' in localStorage
+    //state - состояние
+    const {username} = location.state;
 
 
     if(token)
@@ -27,9 +34,30 @@ function UserForm() {
     }
 
 
+    //we create function after that we will send message
+    //by putting on the button we will send message
+    const sendMessage = ()=>{
+        socket.emit("send_message", {message})
+    };
+
+    useEffect(() => {
+      socket.on("receive_message", (data) => {
+          setMessageReceived(data.message)
+      })
+    }, [socket]);
+
+
     return (
         <div>
             <h2>{username} successfully signed in </h2>
+            <div className = "UserForm">
+                <input placeholder="Message..." onChange= {(event)=>
+                setMessage(event.target.value)
+                }/>
+                <button onClick={sendMessage}>Send message</button>
+                <h1>Message:</h1>
+                {messageReceived}
+            </div>
         </div>
     );
 }
