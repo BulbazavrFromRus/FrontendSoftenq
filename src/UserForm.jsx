@@ -2,6 +2,7 @@ import React, {useEffect,useRef, useState} from 'react';
 import Axios from 'axios';
 import {useLocation, useNavigate} from 'react-router-dom';
 import io from 'socket.io-client'
+import data from "jsonwebtoken/lib/JsonWebTokenError.js";
 //import {useEffect} from 'react'
 
 const socket =io.connect("http://localhost:8001")
@@ -11,10 +12,11 @@ function UserForm() {
     const navigate = useNavigate();
     const location = useLocation();
 
+
     const token = localStorage.getItem('token');
 
-    const[message, setMessage] = useState("")
-    const[messageReceived, setMessageReceived] = useState("")
+    const[message, setMessage] = useState([])
+    const[messageReceived, setMessageReceived] = useState([])
 
     //we find 'username' in localStorage
     //state - состояние
@@ -38,23 +40,23 @@ function UserForm() {
     //by putting on the button we will send message
     const sendMessage = ()=>{
         socket.emit("send_message", message)
-        console.log("DDJKKGHKJL", message);
     };
 
     useEffect(() => {
-    //
-    //     socket.on("receive_message", (data) => {
-    //         setMessageReceived(data.message);
-    //     });
-    // }, [socket]);
-        console.log("fgesdfsds");
+        socket.on("receive_message", (data) => {
+             setMessageReceived(data.message);
+         });
+/*
+
+       // console.log("fgesdfsds");
     socket.on("connection", () => {
             if(socket.connected){
                 console.log("Everything is good")
             }
             socket.emit("send_message", "AASAAAAAAAA")
-            console.log("conioecewfw");
-        });
+            console.log("conioecewfw");*/
+       /* });*/
+
     }, [socket]);
 
 
@@ -68,7 +70,8 @@ function UserForm() {
                 }/>
                 <button onClick={sendMessage}>Send message</button>
                 <h1>Message:</h1>
-                {messageReceived}
+                <h1>{messageReceived}</h1>
+
             </div>
         </div>
     );
