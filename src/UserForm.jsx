@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import io from 'socket.io-client'
 //import {useEffect} from 'react'
 
-const socket =io.connect("http://localhost:8002")
+const socket =io.connect("http://localhost:8001")
 
 
 function UserForm() {
@@ -37,12 +37,23 @@ function UserForm() {
     //we create function after that we will send message
     //by putting on the button we will send message
     const sendMessage = ()=>{
-        socket.emit("send_message", {message})
+        socket.emit("send_message", message)
+        console.log("DDJKKGHKJL", message);
     };
 
     useEffect(() => {
-        socket.on("receive_message", (data) => {
-            setMessageReceived(data.message);
+    //
+    //     socket.on("receive_message", (data) => {
+    //         setMessageReceived(data.message);
+    //     });
+    // }, [socket]);
+        console.log("fgesdfsds");
+    socket.on("connection", () => {
+            if(socket.connected){
+                console.log("Everything is good")
+            }
+            socket.emit("send_message", "AASAAAAAAAA")
+            console.log("conioecewfw");
         });
     }, [socket]);
 
