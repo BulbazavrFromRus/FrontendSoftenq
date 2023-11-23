@@ -31,8 +31,8 @@ function UserForm() {
 
     useEffect(() => {
         socket.on("receive_message", (data) => {
-            console.log(data.message)
-            setMessageReceived(data.message);
+            console.log(data)
+            setMessageReceived(data);
         });
     }, []);
 
