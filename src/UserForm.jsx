@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
-const socket = io.connect("http://localhost:8001");
+const socket = io.connect("https://0123-2a00-b440-3b49-b500-e7fb-b7fb-b114-67a4.ngrok-free.app/ws");
 
 function UserForm() {
     const navigate = useNavigate();
