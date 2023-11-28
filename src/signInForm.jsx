@@ -29,7 +29,6 @@ function Login() {
             console.log('Ответ от сервера:', response.data);
 
             const token = response.data.accessToken; // Получаем токен из ответа
-
             // Сохр.токен в хранилище на стороне клиента
             localStorage.setItem("token", token);
             Axios.defaults.headers.common['Authorization'] = 'Bearer ${token}';
