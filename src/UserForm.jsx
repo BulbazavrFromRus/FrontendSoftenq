@@ -80,9 +80,10 @@ function UserForm() {
     }
 
     const sendMessage = () => {
+
         socket.emit("send_message", message);
-        console.log('Sent message:', message);
-        setMessage(''); // Clear the input field after sending the message
+        setMessages(prevMessages => [...prevMessages, { text: message, sender: username }]);
+        //setMessage(''); // Clear the input field after sending the message
     };
 
     useEffect(() => {
@@ -91,6 +92,7 @@ function UserForm() {
             setMessages(prevMessages => [...prevMessages, data]);
         });
     }, []);
+
 
     return (
         <div>
@@ -105,9 +107,9 @@ function UserForm() {
                 <h1>Messages:</h1>
                 <div className="messages">
                     <ul>
-                            {messages.map((msg, index) => (
-                                <li key={index}>{msg}</li>
-                            ))}
+                        {messages.map((msg, index) => (
+                            <li key={index}>{`${msg.sender}: ${msg.text}`}</li>
+                        ))}
                     </ul>
                 </div>
             </div>
