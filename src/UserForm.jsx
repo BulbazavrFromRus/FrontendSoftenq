@@ -72,6 +72,13 @@ function UserForm() {
     const [messages, setMessages] = useState([]); // New state for messages
     const { username } = location.state;
 
+    const[theme, setTheme] = useState("light");
+
+    const switchTheme = ()=>{
+        setTheme((cur)=>(cur === "light"?"dark":"light"))
+    }
+
+
     if (token) {
         Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } else {
@@ -96,24 +103,38 @@ function UserForm() {
 
 
     return (
-        <div>
-            <h2>{username} successfully signed in </h2>
-            <div className="UserForm">
+        <div className="UserForm" id={theme}>
+            <input onChange={switchTheme} type="checkbox" id="toggle-btn"/>
+            <label htmlFor="toggle-btn" className="toggle-label"></label>
+            <h2 style={{color: theme === "light" ? "black" : "yellow"}} className="heading">
+                User: {username}
+            </h2>
+            <h1 style={{color: theme === "light" ? "black" : "blue"}}>
+                Chat
+            </h1>
+
+            {/*Messages*/}
+            <div className="chat-container">
+                <div style={{color: theme === "light" ? "black" : "yellow"}} className="messages">
+                    <ul >
+                        {messages.map((msg, index) => (
+                            <li key={index} className={msg.sender === username ? "sent" : "received"}>
+                                {`${msg.sender}: ${msg.text}`}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+
+            <div className="input">
                 <input
                     placeholder="Message..."
                     value={message}
                     onChange={(event) => setMessage(event.target.value)}
                 />
                 <button onClick={sendMessage}>Send message</button>
-                <h1>Messages:</h1>
-                <div className="messages">
-                    <ul>
-                        {messages.map((msg, index) => (
-                            <li key={index}>{`${msg.sender}: ${msg.text}`}</li>
-                        ))}
-                    </ul>
-                </div>
             </div>
+
         </div>
     );
 }

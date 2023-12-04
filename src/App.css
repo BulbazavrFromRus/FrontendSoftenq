@@ -15,7 +15,7 @@
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em lightblue);
 }
 
 @keyframes logo-spin {
@@ -84,13 +84,7 @@
   text-align: center;
 }
 
-/*.message {
-  width: 400px;
-  border: 2px solid teal;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 15px;
-}*/
+
 
 .messages {
   padding: 40px;
@@ -101,12 +95,22 @@
   flex-direction: column;
   text-align: center;
   margin: auto;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 
 /*css styles for socket.io*/
 .UserForm {
   text-align: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  padding: 15px 0;
+  position: relative;
 }
 
 .UserForm-logo {
@@ -121,7 +125,7 @@
 }
 
 .UserForm-header {
-  background-color: #282c34;
+  background-color: gray;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -132,7 +136,16 @@
 }
 
 .UserForm-link {
-  color: #61dafb;
+  color: blue;
+}
+
+.heading{
+  color: #131111;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #f00;
 }
 
 @keyframes UserForm-logo-spin {
@@ -143,6 +156,94 @@
     transform: rotate(360deg);
   }
 }
+
+
+/*Themes for light and dark mode*/
+
+#toggle-btn {
+  display: none;
+}
+
+.toggle-label {
+  display: block;
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #131111;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-label::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #d3e719;
+  transition: transform 0.3s ease;
+}
+
+#toggle-btn:checked + .toggle-label::before {
+  transform: translateX(16px);
+}
+
+#toggle-btn:checked ~ #sun {
+  display: none;
+}
+
+#toggle-btn:checked ~ #moon {
+  display: block;
+}
+
+.toggle-label:hover {
+  background-color: #e48989;
+}
+
+#dark{
+  background-color: #131111;
+}
+
+#light{
+  background-color: aliceblue;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.sent {
+  text-align: right;
+  color: #00f; /* Цвет для отправленных сообщений */
+}
+
+.received {
+  text-align: left;
+  color: #0f0; /* Цвет для принятых сообщений */
+}
+
 
 
 
