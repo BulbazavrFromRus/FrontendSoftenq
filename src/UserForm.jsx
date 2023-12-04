@@ -81,7 +81,8 @@ function UserForm() {
 
     const sendMessage = () => {
 
-        socket.emit("send_message", message);
+        const messageData = { text: message, username: username };
+        socket.emit("send_message", messageData);
         setMessages(prevMessages => [...prevMessages, { text: message, sender: username }]);
         //setMessage(''); // Clear the input field after sending the message
     };
