@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import {Link,useNavigate} from "react-router-dom";
-
+import "./SignUp.css"
 
 
 function RegistrationForm() {
@@ -47,11 +47,11 @@ function RegistrationForm() {
     };
 
     return (
-        <div>
-            <h2>Регистрация</h2>
+        <div className="signUp">
+            <h2>Sign up</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Имя пользователя:</label>
+                    <label>Username:</label>
                     <input
                         type="text"
                         required
@@ -61,7 +61,7 @@ function RegistrationForm() {
                     />
                 </div>
                 <div>
-                    <label>Электронная почта:</label>
+                    <label>Email:</label>
                     <input
                         type="text"
                         required
@@ -71,7 +71,7 @@ function RegistrationForm() {
                     />
                 </div>
                 <div>
-                    <label>Пароль:</label>
+                    <label>Password:</label>
                     <input
                         type="password"
                         name="password"
@@ -83,7 +83,7 @@ function RegistrationForm() {
                         onChange={handleInputChange}
                     />
                 </div>
-                <button type="submit">Зарегистрироваться</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     );

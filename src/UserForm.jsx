@@ -61,7 +61,7 @@ function UserForm() {
                 setMessages((prevMessages) => [...prevMessages, data]);
             }
         });
-    }, [messages]); // Include messages in the dependency array to ensure useEffect runs when messages change
+    }, []); // Include messages in the dependency array to ensure useEffect runs when messages change
 
 
 
