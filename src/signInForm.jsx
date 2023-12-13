@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import "./App.css";
+import "./SignIn.css";
 function Login() {
     const [formData, setFormData] = useState({
         name: '',
@@ -40,11 +40,11 @@ function Login() {
     };
 
     return (
-        <div>
-            <h2>Вход</h2>
+        <div className="signIn">
+            <h2>Sign in</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Имя пользователя:</label>
+                    <label>Username:</label>
                     <input
                         type="text"
                         name="name"
@@ -54,7 +54,7 @@ function Login() {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Пароль:</label>
+                    <label>Password:</label>
                     <input
                         type="password"
                         name="password"
@@ -62,9 +62,9 @@ function Login() {
                         onChange={handleInputChange}
                     />
                 </div>
-                <button type="submit">Войти</button>
+                <button type="submit">Submit</button>
                 <div></div>
-                <Link to="/signup" className="button-reg">Зарегистрироваться</Link>
+                <Link to="/signup" className="button-reg">Sign up</Link>
             </form>
         </div>
     );

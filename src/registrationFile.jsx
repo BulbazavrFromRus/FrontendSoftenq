@@ -38,7 +38,8 @@ function RegistrationForm() {
 
             Axios.defaults.headers.common['Authorization'] = 'Bearer ${token}';
 
-            navigate('/user', {replace: true});
+
+            navigate('/user', { state: {username: formData.name }, replace: true });
 
         } catch (error) {
             console.error('Ошибка при отправке данных:', error);
